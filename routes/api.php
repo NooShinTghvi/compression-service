@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompressFileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('compress')->name('compress.')->group(function () {
+    Route::get('', function () {
+        return 'water';
+    });
+    Route::post('upload', [CompressFileController::class, 'upload'])->name('upload');
+    Route::get('download/{batchId}', [CompressFileController::class, 'download'])->name('download');
 });
